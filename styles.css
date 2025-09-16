@@ -1,0 +1,87 @@
+body {
+	margin: 0;
+	font-family: Arial, sans-serif;
+	background: #f7f7f7;
+}
+
+.header {
+	background: #c00;
+	color: #ffd600;
+	padding: 2rem 0;
+	text-align: center;
+	font-size: 2rem;
+	font-weight: bold;
+	letter-spacing: 2px;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.header h1 {
+	margin: 0;
+	font-size: 2.2rem;
+	font-weight: bold;
+}
+
+.site-bg {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.chatbox {
+	background: #fff;
+	border-radius: 16px;
+	box-shadow: 0 8px 32px rgba(200,0,0,0.15), 0 1.5px 8px rgba(0,0,0,0.08);
+	padding: 2rem 2.5rem;
+	max-width: 350px;
+	width: 100%;
+	margin: 2rem auto;
+	position: relative;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+.chatbox-title {
+	font-size: 1.1rem;
+	margin-bottom: 1.5rem;
+	color: #c00;
+	font-weight: bold;
+}
+
+#apiForm {
+	display: flex;
+	gap: 0.5rem;
+}
+
+#inputBox {
+	flex: 1;
+	padding: 0.7rem;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	font-size: 1rem;
+}
+
+button[type="submit"] {
+	background: #c00;
+	color: #ffd600;
+	border: none;
+	border-radius: 8px;
+	padding: 0.7rem 1.2rem;
+	font-size: 1rem;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+button[type="submit"]:hover {
+	background: #a00;
+}
+
+#responseBox {
+	margin-top: 1.5rem;
+	min-height: 2rem;
+	color: #333;
+	font-size: 1rem;
+}
