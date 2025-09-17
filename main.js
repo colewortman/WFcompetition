@@ -1,7 +1,3 @@
-import "dotenv/config";
-
-const apiKey = process.env.API_KEY;
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("apiForm");
 
@@ -24,24 +20,18 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault();
     const inputText = document.getElementById("inputBox").value;
 
-    const response = await fetch(
-      "https://router.huggingface.co/v1/chat/completions",
-      {
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify({
-          messages: [{ role: "user", content: context + inputText }],
-          model: "Qwen/Qwen3-Next-80B-A3B-Thinking:together",
-        }),
-      }
-    );
-    const result = await response.json();
+    const response = await fetch("http://localhost:3000/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        messages: [{ role: "user", content: context + inputText }],
+      }),
+    });
 
+    const result = await response.json();
     const rawReply = result.choices?.[0]?.message?.content || "No response";
     const reply = rawReply.replace(/<think>[\s\S]*?<\/think>/g, "").trim();
+
     console.log("Bot:", reply);
     document.getElementById(
       "responseBox"
