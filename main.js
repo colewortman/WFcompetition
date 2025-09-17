@@ -1,6 +1,7 @@
 /*
-Get text input from the user and send it to the backend API for processing.
-Get response from the backend and display it on the webpage.
+Get text input from the user and send it to the backend API with context for processing.
+Process user input and display it in the chat box.
+Get response from the backend and display it in the chat box.
 */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -8,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const responseBox = document.getElementById("responseBox");
   const inputBox = document.getElementById("inputBox");
 
+  // Context to guide the model's responses
   const context = `
     <context>
       You are a supportive Wells Fargo virtual assistant, here to help customers feel calm, informed, and confident during moments of financial stress. Always be clear, kind, and reassuring in your tone.
@@ -23,11 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
     </context>
   `;
 
+  // Function to add a message to the chat box
   function addMessage(labelText, messageText, roleClass) {
     const wrapper = document.createElement("div");
-    wrapper.className = `message ${roleClass}`; // e.g. "message user" or "message bot"
+    wrapper.className = `message ${roleClass}`;
 
-    // create the bubble element (CSS targets .message .bubble)
     const bubble = document.createElement("div");
     bubble.className = "bubble";
     bubble.textContent = messageText;
@@ -35,19 +37,19 @@ document.addEventListener("DOMContentLoaded", () => {
     wrapper.appendChild(bubble);
     responseBox.appendChild(wrapper);
 
-    // keep the latest message in view
     wrapper.scrollIntoView({ behavior: "smooth", block: "end" });
   }
 
+  // Listen for form submission
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const inputText = inputBox.value.trim();
     if (!inputText) return;
 
-    // show user message
     addMessage("You", inputText, "user");
-    inputBox.value = ""; // clear input
+    inputBox.value = "";
 
+    // Try to reach the backend API
     try {
       const response = await fetch("http://localhost:3000/api/chat", {
         method: "POST",

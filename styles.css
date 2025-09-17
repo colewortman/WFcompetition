@@ -50,7 +50,6 @@ body {
 	font-weight: bold;
 }
 
-/* messages area */
 .messages {
 	flex: 1 1 auto;
 	max-height: 60vh;
@@ -93,7 +92,6 @@ body {
 	border-top-right-radius: 4px;
 }
 
-/* form pinned to bottom of chatbox */
 #apiForm {
 	display: flex;
 	gap: 0.5rem;
