@@ -1,5 +1,12 @@
+/*
+Get text input from the user and send it to the backend API for processing.
+Get response from the backend and display it on the webpage.
+*/
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("apiForm");
+  const responseBox = document.getElementById("responseBox");
+  const inputBox = document.getElementById("inputBox");
 
   const context = `
     <context>
@@ -16,25 +23,52 @@ document.addEventListener("DOMContentLoaded", () => {
     </context>
   `;
 
+  function addMessage(labelText, messageText, roleClass) {
+    const wrapper = document.createElement("div");
+    wrapper.className = `message ${roleClass}`; // e.g. "message user" or "message bot"
+
+    // create the bubble element (CSS targets .message .bubble)
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.textContent = messageText;
+
+    wrapper.appendChild(bubble);
+    responseBox.appendChild(wrapper);
+
+    // keep the latest message in view
+    wrapper.scrollIntoView({ behavior: "smooth", block: "end" });
+  }
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const inputText = document.getElementById("inputBox").value;
+    const inputText = inputBox.value.trim();
+    if (!inputText) return;
 
-    const response = await fetch("http://localhost:3000/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        messages: [{ role: "user", content: context + inputText }],
-      }),
-    });
+    // show user message
+    addMessage("You", inputText, "user");
+    inputBox.value = ""; // clear input
 
-    const result = await response.json();
-    const rawReply = result.choices?.[0]?.message?.content || "No response";
-    const reply = rawReply.replace(/<think>[\s\S]*?<\/think>/g, "").trim();
+    try {
+      const response = await fetch("http://localhost:3000/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: [{ role: "user", content: context + inputText }],
+        }),
+      });
 
-    console.log("Bot:", reply);
-    document.getElementById(
-      "responseBox"
-    ).innerHTML += `<p><strong>You:</strong> ${inputText}</p><p><strong>Bot:</strong> ${reply}</p>`;
+      const result = await response.json();
+      const rawReply = result.choices?.[0]?.message?.content || "No response";
+      const reply = rawReply.replace(/<think>[\s\S]*?<\/think>/g, "").trim();
+
+      addMessage("Bot", reply, "bot");
+    } catch (err) {
+      console.error(err);
+      addMessage(
+        "Bot",
+        "Sorry — there was an error contacting the server.",
+        "bot"
+      );
+    }
   });
 });

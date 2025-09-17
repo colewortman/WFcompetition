@@ -1,3 +1,8 @@
+/*
+Run and serve a backend server for the Hugging Face API using Node.js and Express.
+Get request from the frontend, forward it to the Hugging Face API, and return the response.
+*/
+
 import express from "express";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
