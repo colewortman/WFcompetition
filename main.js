@@ -50,6 +50,13 @@ document.addEventListener("DOMContentLoaded", () => {
     inputBox.value = "";
 
     // Try to reach the backend API
+
+    const typingIndicator = document.createElement("div");
+    typingIndicator.className = "message bot";
+    typingIndicator.innerHTML = `<div class="bubble typing">Thinking</div>`;
+    responseBox.appendChild(typingIndicator);
+    typingIndicator.scrollIntoView({ behavior: "smooth", block: "end" });
+
     try {
       const response = await fetch("http://localhost:3000/api/chat", {
         method: "POST",
@@ -63,9 +70,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const rawReply = result.choices?.[0]?.message?.content || "No response";
       const reply = rawReply.replace(/<think>[\s\S]*?<\/think>/g, "").trim();
 
+      responseBox.removeChild(typingIndicator);
       addMessage("Bot", reply, "bot");
     } catch (err) {
       console.error(err);
+      responseBox.removeChild(typingIndicator);
       addMessage(
         "Bot",
         "Sorry — there was an error contacting the server.",
