@@ -3,6 +3,10 @@
 In this competition I was tasked with creating an idea that would help people get instant access to financial help.
 My solution was to use AI and make a chat bot that would help users.
 
+This wouldn't be any ordinary chat bot if it were to be fully developed. This would be a virtual financial advisor that users can talk to at any time day or night.
+The AI could read the user's typical purchases and look for ways the user can save money, analyze and provide a detailed budget, give investment advice, etc.
+It would be an entirely optional tool; Users would not be forced to use the AI or allow it to read their finances.
+
 ## This project is a proof of concept that uses a general-use, open-source, AI model from huggingface.co. Any information given and received from the AI can not be trusted.
 
 ---
