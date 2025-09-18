@@ -1,15 +1,15 @@
-## Wells Fargo x Global Career Accelerator Competition!
+# Wells Fargo x Global Career Accelerator Competition!
 
 In this competition I was tasked with creating an idea that would help people get instant access to financial help.
 My solution was to use AI and make a chat bot that would help users.
 
-# This project is a proof of concept that uses a general-use, open-source, AI model from huggingface.co. Any information given and received from the AI can not be trusted.
+## This project is a proof of concept that uses a general-use, open-source, AI model from huggingface.co. Any information given and received from the AI can not be trusted.
 
 ---
 
-## Try it yourself!
+# Try it yourself!
 
-# Set up Hugging Face API key
+## Set up Hugging Face API key
 
 If you don't have a Hugging Face account, make one here https://huggingface.co/.
 
@@ -26,7 +26,7 @@ Note: normally, .env is excluded from GitHub for security reasons, but in this r
 
 Change the `API_KEY` to be the same as your token key, which should look like `hf_xxxxxxxxxxxxxxxxxxxx`.
 
-# Build and run the app
+## Build and run the app
 
 Download Docker and docker-compose if needed https://www.docker.com/.
 
