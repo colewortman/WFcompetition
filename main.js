@@ -49,14 +49,14 @@ document.addEventListener("DOMContentLoaded", () => {
     addMessage("You", inputText, "user");
     inputBox.value = "";
 
-    // Try to reach the backend API
-
+    // handle AI thinking visual
     const typingIndicator = document.createElement("div");
     typingIndicator.className = "message bot";
     typingIndicator.innerHTML = `<div class="bubble typing">Thinking</div>`;
     responseBox.appendChild(typingIndicator);
     typingIndicator.scrollIntoView({ behavior: "smooth", block: "end" });
 
+    // Try to reach the backend API
     try {
       const response = await fetch("http://localhost:3000/api/chat", {
         method: "POST",
